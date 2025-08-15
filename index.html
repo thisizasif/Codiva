@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-      <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.ico">
     <style>
         body {
             margin: 0;
@@ -15,6 +15,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         .welcome-container {
@@ -23,22 +24,33 @@
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 12px;
             margin-bottom: 15px;
+            animation: logoGlow 2s infinite alternate;
         }
 
         h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
         }
 
-        p {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #9bb1d0;
+        .progress-bar {
+            width: 150px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin: 15px auto 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #4fc3f7;
+            animation: fillProgress 1.2s linear forwards;
         }
 
         @keyframes fadeIn {
@@ -52,21 +64,53 @@
                 transform: translateY(0);
             }
         }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes logoGlow {
+            from {
+                box-shadow: 0 0 5px #4fc3f7;
+            }
+
+            to {
+                box-shadow: 0 0 20px #4fc3f7;
+            }
+        }
+
+        @keyframes fillProgress {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
-                const userAgent = navigator.userAgent.toLowerCase();
-                const screenWidth = window.innerWidth;
+                document.body.style.animation = "fadeOut 0.6s forwards";
+                setTimeout(function () {
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    const screenWidth = window.innerWidth;
+                    const isMobileOrTablet = /mobile|android|iphone|ipad|ipod|tablet/.test(userAgent) || screenWidth < 1024;
 
-                const isMobileOrTablet = /mobile|android|iphone|ipad|ipod|tablet/.test(userAgent) || screenWidth < 1024;
-
-                if (isMobileOrTablet) {
-                    window.location.href = "tablet.html";
-                } else {
-                    window.location.href = "desktop.html";
-                }
-            }, 2000); // 1.2 sec delay so user sees the welcome screen
+                    if (isMobileOrTablet) {
+                        window.location.href = "tablet.html";
+                    } else {
+                        window.location.href = "desktop.html";
+                    }
+                }, 600); // Wait for fade-out to complete
+            }, 1500); // Show welcome for 1.5 seconds
         });
     </script>
 </head>
@@ -75,9 +119,10 @@
     <div class="welcome-container">
         <img src="favicon.ico" alt="Logo" class="logo">
         <h1>Welcome to Codiva</h1>
-        <p>Preparing your experience...</p>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
     </div>
 </body>
 
 </html>
-
