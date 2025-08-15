@@ -2,331 +2,80 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="favicon.ico">
-  <title>Codiva</title>
-  <style>
-    :root {
-      --bg: #0b1020;
-      --card: #121a32;
-      --muted: #9db0d0;
-      --text: #e8efff;
-      --accent: #6ea8ff;
-      --accent-2: #79f2c0;
-      --danger: #ff6b6b;
-      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
-      --radius: 16px;
-    }
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0a0f1c, #101d33);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        .welcome-container {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      color: var(--text);
-    }
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
 
-    body {
-      background: var(--bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-    .app {
-      width: 1200px;
-      max-width: 95vw;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
+        p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #9bb1d0;
+        }
 
-    header {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, .06);
-      background: linear-gradient(180deg, rgba(110, 168, 255, .12), transparent);
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-    header .logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: conic-gradient(from 220deg at 50% 50%, var(--accent), var(--accent-2));
-      filter: drop-shadow(0 2px 8px rgba(110, 168, 255, .35));
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const screenWidth = window.innerWidth;
 
-    header h1 {
-      font-size: 20px;
-      margin: 0;
-    }
+                const isMobileOrTablet = /mobile|android|iphone|ipad|ipod|tablet/.test(userAgent) || screenWidth < 1024;
 
-    header .sub {
-      color: var(--muted);
-      font-size: 14px;
-      margin-left: auto;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      padding: 20px;
-    }
-
-    .field {
-      background: rgba(255, 255, 255, .02);
-      border: 1px solid rgba(255, 255, 255, .06);
-      border-radius: 14px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 300px;
-      border: 1px solid rgba(255, 255, 255, .08);
-      background: #0e1530;
-      color: var(--text);
-      border-radius: 12px;
-      padding: 14px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 15px;
-      resize: vertical;
-      outline: none;
-      box-shadow: inset 0 0 0 1px rgba(110, 168, 255, .05);
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 15px;
-      color: white;
-      background: linear-gradient(180deg, var(--accent), #3c7bff);
-      box-shadow: 0 6px 16px rgba(61, 123, 255, .35);
-      transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
-    }
-
-    .btn:hover {
-      filter: brightness(1.05);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn.secondary {
-      background: linear-gradient(180deg, #2a365c, #1d2744);
-      box-shadow: none;
-      color: #dce6ff;
-      border: 1px solid rgba(255, 255, 255, .08);
-    }
-
-    .btn.danger {
-      background: linear-gradient(180deg, #ff7b7b, #dc5b5b);
-      box-shadow: 0 6px 14px rgba(255, 107, 107, .35);
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 12px;
-      margin-left: auto;
-    }
-
-    .footer {
-      padding: 14px 20px;
-      border-top: 1px solid rgba(255, 255, 255, .06);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(110, 168, 255, .12);
-      color: #cfe1ff;
-      border: 1px solid rgba(110, 168, 255, .25);
-    }
-  </style>
+                if (isMobileOrTablet) {
+                    window.location.href = "tablet.html";
+                } else {
+                    window.location.href = "desktop.html";
+                }
+            }, 2000); // 1.2 sec delay so user sees the welcome screen
+        });
+    </script>
 </head>
 
 <body>
-  <div class="app">
-    <header>
-      <div class="logo" aria-hidden="true"></div>
-      <h1>Codiva</h1>
-      <span class="sub">Desktop • Online</span>
-    </header>
-
-    <div class="grid">
-      <div class="field">
-        <label for="input">Input Text / Code</label>
-        <textarea id="input" placeholder="Type text to encode or paste code to decode..."></textarea>
-        <div class="row">
-          <button class="btn" id="encodeBtn">Encode</button>
-          <button class="btn" id="decodeBtn">Decode</button>
-          <button class="btn secondary" id="copyInput">Copy Input</button>
-          <button class="btn secondary" id="clearInput">Clear</button>
-          <span class="hint">Shift+Enter=Decode • Ctrl+Enter=Encode</span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="output">Result</label>
-        <textarea id="output" placeholder="Result appears here..." readonly></textarea>
-        <div class="row">
-          <button class="btn" id="copyBtn">Copy Result</button>
-          <button class="btn secondary" id="clearOutput">Clear</button>
-          <button class="btn danger" id="swapBtn" title="Swap input and output">Swap</button>
-          <span class="hint" id="status"></span>
-        </div>
-      </div>
+    <div class="welcome-container">
+        <img src="favicon.ico" alt="Logo" class="logo">
+        <h1>Welcome to Codiva</h1>
+        <p>Preparing your experience...</p>
     </div>
-
-    <div class="footer">
-      <div class="pill">Whitespace-tolerant decoder</div>
-      <div>Made with 💖 • thisizasif</div>
-    </div>
-  </div>
-
-  <script>
-    const MAP = {
-      "A": "KQc", "B": "DRP", "C": "htX", "D": "4Il", "E": "wW9", "F": "Ovc", "G": "UkT", "H": "NMM", "I": "o0U", "J": "xWz", "K": "89H", "L": "e3g", "M": "ofC", "N": "yk7", "O": "l9d", "P": "9HT", "Q": "oJ6", "R": "Pjy", "S": "u7I", "T": "24i", "U": "zmc", "V": "I6O", "W": "JqT", "X": "v00", "Y": "PRm", "Z": "Nh9",
-      "a": "igG", "b": "JOa", "c": "N7l", "d": "lYD", "e": "SEt", "f": "Dpk", "g": "vN2", "h": "TYt", "i": "0Ww", "j": "No8", "k": "EaD", "l": "6EY", "m": "xgo", "n": "5Iv", "o": "q1E", "p": "LMV", "q": "cf9", "r": "w9t", "s": "j33", "t": "CSP", "u": "dgT", "v": "m9i", "w": "PeG", "x": "3qN", "y": "7Yt", "z": "NAA",
-      "0": "sf1", "1": "pUe", "2": "vvN", "3": "lb6", "4": "5th", "5": "1gK", "6": "aYo", "7": "FsB", "8": "0AK", "9": "gDX",
-      " ": "B7Z", "!": "wOK", "@": "Iqr", "#": "TuG", "$": "2DV", "%": "d00", "^": "AHO", "&": "1t7", "*": "go3", "(": "3Df", ")": "h8H", "-": "iuC", "_": "TRD", "=": "u5O", "+": "hxG", "[": "Q1e", "]": "J10", "{": "wGo", "}": "6pq", ";": "ZbD", ":": "ox2", "'": "gGC", "\"": "MfD", ",": "uZk", ".": "s3L", "<": "ib3", ">": "VeB", "?": "jnm", "/": "YRl", "\\": "DTO", "|": "QwD", "`": "rxP", "~": "i0f"
-    };
-    const REVERSE = Object.fromEntries(Object.entries(MAP).map(([k, v]) => [v, k]));
-
-    const $ = sel => document.querySelector(sel);
-    const input = $("#input");
-    const output = $("#output");
-    const status = $("#status");
-
-    function setStatus(msg, ok = true) {
-      status.textContent = msg;
-      status.style.color = ok ? "var(--accent-2)" : "var(--danger)";
-    }
-
-    function encodeText() {
-      const txt = input.value;
-      if (!txt) { setStatus("Nothing to encode", false); return; }
-      let out = "";
-      for (const ch of txt) {
-        if (MAP[ch] === undefined) { setStatus(`No mapping for '${ch}'`, false); return; }
-        out += MAP[ch];
-      }
-      output.value = out;
-      setStatus(`Encoded ${txt.length} chars → ${out.length} code symbols`);
-    }
-
-    function decodeCode() {
-      let code = input.value.replace(/\s+/g, "");
-      if (!code) { setStatus("Nothing to decode", false); return; }
-      if (code.length % 3 !== 0) { setStatus("Invalid encoded length (must be multiple of 3)", false); output.value = ""; return; }
-      let res = "";
-      for (let i = 0; i < code.length; i += 3) {
-        const chunk = code.slice(i, i + 3);
-        const ch = REVERSE[chunk];
-        if (ch === undefined) { setStatus(`Invalid code chunk: "${chunk}" at position ${i / 3 + 1}`, false); output.value = ""; return; }
-        res += ch;
-      }
-      output.value = res;
-      setStatus(`Decoded ${code.length / 3} chunks → ${res.length} chars`);
-    }
-
-    async function copyToClipboard(text) {
-      try { await navigator.clipboard.writeText(text); setStatus("Copied to clipboard"); }
-      catch (e) { setStatus("Clipboard blocked by browser", false); }
-    }
-
-    $("#encodeBtn").addEventListener("click", encodeText);
-    $("#decodeBtn").addEventListener("click", decodeCode);
-    $("#copyBtn").addEventListener("click", () => copyToClipboard(output.value));
-    $("#copyInput").addEventListener("click", () => copyToClipboard(input.value));
-    $("#clearInput").addEventListener("click", () => { input.value = ""; setStatus("Cleared input"); });
-    $("#clearOutput").addEventListener("click", () => { output.value = ""; setStatus("Cleared result"); });
-    $("#swapBtn").addEventListener("click", () => { [input.value, output.value] = [output.value, input.value]; setStatus("Swapped"); });
-
-    document.addEventListener("keydown", (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { encodeText(); e.preventDefault(); }
-      if (e.shiftKey && e.key === "Enter") { decodeCode(); e.preventDefault(); }
-    });
-    // disable right click
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    // Add newline mapping
-    MAP["\n"] = "NL!";
-    REVERSE["NL!"] = "\n";
-
-    function encodeText() {
-      const txt = input.value;
-      if (!txt) { setStatus("Nothing to encode", false); return; }
-      let out = "";
-      for (const ch of txt) {
-        if (MAP[ch] === undefined) { setStatus(`No mapping for '${ch}'`, false); return; }
-        out += MAP[ch];
-      }
-      output.value = out;
-      setStatus(`Encoded ${txt.length} chars → ${out.length} code symbols`);
-    }
-
-    function decodeCode() {
-      let code = input.value.replace(/\s+/g, "");
-      if (!code) { setStatus("Nothing to decode", false); return; }
-
-      let res = "";
-      for (let i = 0; i < code.length;) {
-        // Check if chunk is the newline token
-        if (code.slice(i, i + 3) === "NL!") {
-          res += "\n";
-          i += 3;
-          continue;
-        }
-
-        const chunk = code.slice(i, i + 3);
-        const ch = REVERSE[chunk];
-        if (ch === undefined) { setStatus(`Invalid code chunk: "${chunk}" at position ${i / 3 + 1}`, false); output.value = ""; return; }
-        res += ch;
-        i += 3;
-      }
-
-      output.value = res;
-      setStatus(`Decoded ${res.length} chars`);
-    }
-
-  </script>
 </body>
 
 </html>
