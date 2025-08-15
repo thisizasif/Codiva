@@ -1,3 +1,4 @@
+https://thisizasif.github.io/Codiva/
 # Codiva – Text Encoder & Decoder
 
 **Codiva** is a **desktop-friendly tool** that lets you **encode and decode text** using a custom cipher. It is simple, fast, and works completely **offline**. Perfect for secret messages, fun ciphers, or learning about encoding techniques.
