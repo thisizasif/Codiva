@@ -33,22 +33,28 @@
         }
 
         body {
-            background: var(--bg);
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 8px;
+            /* center horizontally */
+            align-items: flex-start;
+            /* top-align instead of center */
+            margin: 0;
+            padding: 0;
+            /* remove padding */
+            min-height: 100vh;
+            background-color: #f0f2f8;
         }
 
         .app {
             width: 100%;
-            max-width: 420px;
-            /* Slightly smaller for phone view */
-            background: var(--card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            max-width: 100%;
+            /* allow container to fill screen */
+            margin: 0;
+            /* remove extra margin */
+            border-radius: 0;
+            /* optional for full-width mobile */
         }
+
 
         header {
             padding: 12px;
