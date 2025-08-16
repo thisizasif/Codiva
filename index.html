@@ -3,8 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codiva-Welcome</title>
+    <meta name="description"
+        content="Codiva – A modern platform for seamless experiences across desktop, tablet, and mobile devices.">
+    <meta name="keywords" content="Codiva, technology, responsive design, desktop, tablet, mobile, platform">
+    <meta name="author" content="Codiva Team">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Welcome to Codiva">
+    <meta property="og:description" content="A modern platform for seamless experiences across all devices.">
+    <meta property="og:image" content="favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thisizasif.github.io/Codiva/">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Welcome to Codiva">
+    <meta name="twitter:description" content="A modern platform for seamless experiences across all devices.">
+    <meta name="twitter:image" content="favicon.ico">
+
     <link rel="icon" type="image/png" href="favicon.ico">
+
     <style>
         body {
             margin: 0;
@@ -95,29 +116,40 @@
             }
         }
     </style>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
                 document.body.style.animation = "fadeOut 0.6s forwards";
-                setTimeout(function () {
-                    const userAgent = navigator.userAgent.toLowerCase();
-                    const screenWidth = window.innerWidth;
-                    const isMobileOrTablet = /mobile|android|iphone|ipad|ipod|tablet/.test(userAgent) || screenWidth < 1024;
 
-                    if (isMobileOrTablet) {
+                setTimeout(function () {
+                    const ua = navigator.userAgent.toLowerCase();
+                    const width = window.innerWidth;
+
+                    const isMobilePhone =
+                        (/iphone|ipod|android.*mobile|windows phone|blackberry|opera mini|mobile safari|palm/i.test(ua)) &&
+                        width <= 768;
+
+                    const isTablet =
+                        (/ipad|android(?!.*mobile)|tablet|kindle|silk/i.test(ua)) ||
+                        (width > 768 && width <= 1024);
+
+                    if (isMobilePhone) {
+                        window.location.href = "phone.html";
+                    } else if (isTablet) {
                         window.location.href = "tablet.html";
                     } else {
                         window.location.href = "desktop.html";
                     }
-                }, 600); // Wait for fade-out to complete
-            }, 1500); // Show welcome for 1.5 seconds
+                }, 600); // Wait for fade-out
+            }, 1500); // Show welcome screen for 1.5s
         });
     </script>
 </head>
 
 <body>
     <div class="welcome-container">
-        <img src="favicon.ico" alt="Logo" class="logo">
+        <img src="favicon.ico" alt="Codiva Logo" class="logo">
         <h1>Welcome to Codiva</h1>
         <div class="progress-bar">
             <div class="progress-fill"></div>
